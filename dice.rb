@@ -1,5 +1,3 @@
-
-
 require "sinatra"
 require "sinatra/reloader"
 require "better_errors"
@@ -28,7 +26,7 @@ get("/dice/2/6") do
   sum = first_die + second_die
 	
   @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
-  erb(:dice_2)
+  erb(:dice_2, { :layout => :wrapper })
 end
 
 get("/dice/2/10") do
@@ -37,14 +35,14 @@ get("/dice/2/10") do
   sum = first_die + second_die
 	
   @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
-	erb(:dice_2)
+	erb(:dice_2, { :layout => :wrapper })
 end
 
 get("/dice/1/20") do
   die = rand(1..6)
 
   @outcome = "You rolled a #{die}."
-  erb(:dice_3)
+  erb(:dice_3, { :layout => :wrapper })
 
 end
 
@@ -59,6 +57,19 @@ get("/dice/5/4") do
   sum = first_die + second_die + third_die + fourth_die + fifth_die
 	
   @outcome = "You rolled five die for a total of #{sum}."
-  erb(:dice_4)
+  erb(:dice_4, { :layout => :wrapper })
 
+end
+
+
+get("/dice/100/6") do
+  @rolls = []
+
+  100.times do
+    die = rand(1..6)
+
+    @rolls.push(die)
+  end
+
+  erb(:dice_6, { :layout => :wrapper })
 end
